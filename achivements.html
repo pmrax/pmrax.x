@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Achievements | Pranabesh Mondal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container py-5" id="achievement-container">
+    <h1 class="text-center mb-4">Achievement Details</h1>
+    <div id="achievement-content" class="text-center"></div>
+  </div>
+
+  <script>
+    const achievements = {
+      1: {
+        title: "Hackathon Finalist - JISTech 2K25",
+        description: "Reached finals of JISTech 2K25 Hackathon with an innovative full-stack web solution.",
+        image: "assets/images/achievement1.jpg"
+      },
+      2: {
+        title: "National NCC Participation",
+        description: "Represented college at national-level NCC camp promoting leadership and discipline.",
+        image: "assets/images/achievement2.jpg"
+      },
+      3: {
+        title: "CodeSprint Champion",
+        description: "Won 1st place in a regional coding contest by developing a Python-based web app.",
+        image: "assets/images/achievement3.jpg"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    const content = document.getElementById("achievement-content");
+    if (achievements[id]) {
+      const ach = achievements[id];
+      content.innerHTML = `
+        <img src="${ach.image}" class="img-fluid mb-4" alt="${ach.title}" style="max-width: 400px;" />
+        <h2>${ach.title}</h2>
+        <p class="lead">${ach.description}</p>
+        <a href="index.html#achievements" class="btn btn-outline-primary mt-3">← Back to Home</a>
+      `;
+    } else {
+      content.innerHTML = `<p class="text-danger">Achievement not found.</p>`;
+    }
+  </script>
+</body>
+</html>
