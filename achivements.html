@@ -8,7 +8,7 @@
 <body>
   <div class="container py-5" id="achievement-container">
     <h1 class="text-center mb-4">Achievement Details</h1>
-    <div id="achievement-content" class="text-center"></div>
+    <div id="achievement-content"></div>
   </div>
 
   <script>
@@ -16,17 +16,50 @@
       1: {
         title: "Hackathon Finalist - JISTech 2K25",
         description: "Reached finals of JISTech 2K25 Hackathon with an innovative full-stack web solution.",
-        image: "assets/images/achievement1.jpg"
+        images: [
+          "assets/images/achivements/JISTech_2k25.jpg",
+          "assets/images/achivements/achivements_extra/JISTech_2k25_cert.jpg",
+          "assets/images/achivements/achivements_extra/trophy.jpg"
+        ],
+        highlights: [
+          "Built a disaster management web app with real-time location mapping.",
+          "Collaborated with 4 team members under 48-hour development sprint.",
+          "Presented solution in front of tech industry experts and jury panel."
+        ],
+        technologies: ["Node.js", "Express.js", "Socket.IO", "Leaflet.js", "MongoDB"],
+        impact: "Enhanced real-time development skills and teamwork under pressure. Received appreciation for UI and responsiveness."
       },
       2: {
         title: "National NCC Participation",
         description: "Represented college at national-level NCC camp promoting leadership and discipline.",
-        image: "assets/images/achievement2.jpg"
+        images: [
+          "assets/images/achievement2.jpg",
+          "assets/images/ncc_parade.jpg",
+          "assets/images/ncc_group.jpg"
+        ],
+        highlights: [
+          "Participated in Republic Day parade drills and group tasks.",
+          "Conducted social awareness skit on cleanliness and hygiene.",
+          "Attended leadership sessions led by army officials."
+        ],
+        technologies: [],
+        impact: "Strengthened leadership, discipline, and public speaking. Built lasting connections and represented institute at national level."
       },
       3: {
         title: "CodeSprint Champion",
-        description: "Won 1st place in a regional coding contest by developing a Python-based web app.",
-        image: "assets/images/achievement3.jpg"
+        description: "Won 1st place in a regional coding contest with a data-driven COVID dashboard.",
+        images: [
+          "assets/images/achievement3.jpg",
+          "assets/images/codesprint_team.jpg",
+          "assets/images/codesprint_award.jpg"
+        ],
+        highlights: [
+          "Developed a Python-based web app to visualize live COVID stats.",
+          "Used APIs to fetch real-time data from WHO sources.",
+          "Impressed judges with clean UI and interactive graphs."
+        ],
+        technologies: ["Python", "Flask", "REST API", "Chart.js", "Bootstrap"],
+        impact: "Improved API handling and data visualization. Gained confidence in presenting tech solutions."
       }
     };
 
@@ -34,13 +67,40 @@
     const id = params.get("id");
 
     const content = document.getElementById("achievement-content");
+
     if (achievements[id]) {
       const ach = achievements[id];
+
+      const imagesHTML = ach.images.map(src => `
+        <div class="col-md-4 mb-3">
+          <img src="${src}" class="img-fluid rounded shadow-sm" alt="${ach.title}">
+        </div>
+      `).join("");
+
+      const highlightsHTML = ach.highlights.map(item => `<li>${item}</li>`).join("");
+      const techHTML = ach.technologies.length ? `<p><strong>Technologies Used:</strong> ${ach.technologies.join(", ")}</p>` : "";
+
       content.innerHTML = `
-        <img src="${ach.image}" class="img-fluid mb-4" alt="${ach.title}" style="max-width: 400px;" />
-        <h2>${ach.title}</h2>
-        <p class="lead">${ach.description}</p>
-        <a href="index.html#achievements" class="btn btn-outline-primary mt-3">← Back to Home</a>
+        <div class="card shadow p-4">
+          <h2 class="text-center text-primary">${ach.title}</h2>
+          <p class="lead text-center">${ach.description}</p>
+
+          <div class="row my-4">
+            ${imagesHTML}
+          </div>
+
+          <h5>Key Highlights:</h5>
+          <ul>${highlightsHTML}</ul>
+
+          ${techHTML}
+
+          <h5>Impact / Reflection:</h5>
+          <p>${ach.impact}</p>
+
+          <div class="text-center mt-4">
+            <a href="index.html" class="btn btn-outline-secondary">← Back to Home</a>
+          </div>
+        </div>
       `;
     } else {
       content.innerHTML = `<p class="text-danger">Achievement not found.</p>`;
