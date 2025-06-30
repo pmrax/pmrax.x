@@ -145,17 +145,35 @@
 
             <div class="mb-3">
               <label class="form-label">Field of Innovation</label>
-              <select name="field" class="form-select" required>
+              <select name="field" class="form-select" id="field-select" required>
                 <option selected disabled value="">Select field</option>
                 <option>Artificial Intelligence</option>
                 <option>Healthcare</option>
                 <option>Education</option>
-                <option>Environment / Sustainability</option>
-                <option>Robotics / Hardware</option>
                 <option>Finance / Blockchain</option>
-                <option>Other</option>
+                <option value="other">Other</option>
               </select>
             </div>
+
+            <div class="mb-3 d-none" id="other-field-container">
+              <label class="form-label">Please specify</label>
+              <input type="text" name="other_field" class="form-control" placeholder="Enter your field of innovation" />
+            </div>
+
+            <script>
+              const fieldSelect = document.getElementById("field-select");
+              const otherFieldContainer = document.getElementById("other-field-container");
+
+              fieldSelect.addEventListener("change", function () {
+                if (this.value === "other") {
+                  otherFieldContainer.classList.remove("d-none");
+                  otherFieldContainer.querySelector("input").required = true;
+                } else {
+                  otherFieldContainer.classList.add("d-none");
+                  otherFieldContainer.querySelector("input").required = false;
+                }
+              });
+            </script>
 
             <div class="mb-3">
               <label class="form-label">Team Members (if any)</label>
@@ -163,7 +181,7 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Google Drive / Dropbox Link</label>
+              <label class="form-label">Google Drive / One Drive</label>
               <input type="url" name="drive_link" class="form-control" placeholder="https://drive.google.com/your-file-link" required />
               <div class="form-text">Upload your docs and paste the shareable public link here.</div>
             </div>
