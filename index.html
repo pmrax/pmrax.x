@@ -75,6 +75,23 @@
       padding: 0.6rem 1rem;
       border-radius: 50px;
     }
+
+    .badge-coming {
+      background-color: #ffc107;
+      color: #000;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      animation: pulse 2s infinite;
+    }
+
+    .download-badges {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
   
     .card {
       border: none;
@@ -434,7 +451,7 @@
             <!-- Downloads -->
             <div class="section-box text-center">
               <div class="section-title"><i class="bi bi-download text-dark"></i> Download & Access</div>
-              <div class="badge bg-warning text-dark">🚧 Apps Under Development — Available Soon</div>
+              <div class="badge-coming">🚧 Apps Under Development — Available Soon</div>
               <div class="download-badges mt-4">
                 <button class="btn btn-outline-primary" disabled><i class="bi bi-windows"></i> Windows</button>
                 <button class="btn btn-outline-success" disabled><i class="bi bi-android2"></i> Android</button>
